@@ -1,10 +1,13 @@
 #ifndef __MONTY__H
 #define __MONTY__H
-
-#include<stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <signal.h>
+#include <errno.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -35,7 +38,14 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/*String functions*/
+int _strlen(const char *str);
 int _strcmp(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+
+/** linked lists **/
 char **tokenn(char *str);
 size_t print_dlistint(const stack_t *h);
 size_t dlistint_len(const stack_t *h);

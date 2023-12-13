@@ -1,7 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 /**
 * free_arr - free an array
 * @arr: the array u wanna free
@@ -37,7 +34,7 @@ char **tokenn(char *str)
 	token = strtok(str, " \t");
 	while (token != NULL)
 	{
-		tokens[i] = strdup(token);
+		tokens[i] = _strdup(token);
 		token = strtok(NULL, " \t");
 		i++;
 	}
@@ -53,9 +50,9 @@ char **tokenn(char *str)
 
 int main(int argc, char *argv[])
 {
-	char *line = NULL;
-	size_t len = 0;
-	stack_t *head;
+	FILE *fp;
+	char *line;
+	stack_t *head = NULL;
 	char **token = NULL;
 	int i = 0;
 
@@ -64,14 +61,15 @@ int main(int argc, char *argv[])
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	FILE *fp = fopen(argv[1], "r");
+	fp = fopen(argv[1], "r");
 
 	if (fp == NULL)
 	{
 		printf("Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (getline(&line, &len, fp) != -1)
+	line = malloc(sizeof(char) * 2048);
+	while (fgets(line, 100, fp) != NULL)
 	{
 		i++;
 		token = tokenn(line);
@@ -82,11 +80,11 @@ int main(int argc, char *argv[])
 		else
 		{
 			printf("L %i: unknown instruction %s\n", i, token[1]);
+			free(line);
 			exit(EXIT_FAILURE);
 		}
-		free_arr(token);
-		free(line);
 	}
+	free(line);
 	fclose(fp);
 	return (0);
 }
