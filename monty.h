@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <signal.h>
 #include <errno.h>
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)

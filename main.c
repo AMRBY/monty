@@ -51,10 +51,9 @@ char **tokenn(char *str)
 int main(int argc, char *argv[])
 {
 	FILE *fp;
-	char *line;
+	char *line, **token = NULL;
 	stack_t *head = NULL;
-	char **token = NULL;
-	int i = 0;
+	int i = 0, j;
 
 	if (argc != 2)
 	{
@@ -72,17 +71,21 @@ int main(int argc, char *argv[])
 	while (fgets(line, 100, fp) != NULL)
 	{
 		i++;
-		token = tokenn(line);
-		if (_strcmp(token[0], "push") == 0)
-			add_dnodeint(&head, atoi(token[1]));
-		else if (_strcmp(token[0], "pall") == 0)
-			print_dlistint(head);
-		else
-		{
-			printf("L %i: unknown instruction %s\n", i, token[1]);
-			free(line);
-			exit(EXIT_FAILURE);
-		}
+		j = _strlen(line);
+		if (j == 1)
+			continue;
+		line[j - 1] = '\0';
+			token = tokenn(line);
+			if (_strcmp(token[0], "push") == 0)
+				add_dnodeint(&head, atoi(token[1]));
+			else if (_strcmp(token[0], "pall") == 0)
+				print_dlistint(head);
+			else
+			{
+				printf("L %i: unknown instruction %s\n", i, token[1]);
+				free(line);
+				exit(EXIT_FAILURE);
+			}
 	}
 	free(line);
 	fclose(fp);
