@@ -53,7 +53,6 @@ void ifs(FILE *fp, char *line)
 	char **token = NULL;
 	stack_t *head = NULL;
 	int i = 0, j;
-	stack_t *h;
 
 	while (fgets(line, 100, fp) != NULL)
 	{
@@ -65,7 +64,7 @@ void ifs(FILE *fp, char *line)
 		token = tokenn(line);
 
 		if (_strcmp(token[0], "push") == 0)
-			h = add_dnodeint(&head, atoi(token[1]));
+			add_dnodeint(&head, atoi(token[1]));
 		else if (_strcmp(token[0], "pall") == 0)
 			print_dlistint(head);
 		else
