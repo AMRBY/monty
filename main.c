@@ -53,6 +53,7 @@ void ifs(FILE *fp, char *line)
 	char **token = NULL;
 	stack_t *head = NULL;
 	int i = 0, j;
+	stack_t *h;
 
 	while (fgets(line, 100, fp) != NULL)
 	{
@@ -64,7 +65,7 @@ void ifs(FILE *fp, char *line)
 		token = tokenn(line);
 
 		if (_strcmp(token[0], "push") == 0)
-			add_dnodeint(&head, atoi(token[1]));
+			h = add_dnodeint(&head, atoi(token[1]));
 		else if (_strcmp(token[0], "pall") == 0)
 			print_dlistint(head);
 		else
@@ -72,7 +73,10 @@ void ifs(FILE *fp, char *line)
 			printf("L %i: unknown instruction %s\n", i, token[1]);
 			exit(EXIT_FAILURE);
 		}
+	free_arr(token);
 	}
+	free_dlistint(head);
+	free(line);
 }
 /**
 * main - main function
@@ -102,7 +106,6 @@ int main(int argc, char *argv[])
 	if (line == NULL)
 		return (1);
 	ifs(fp, line);
-	free(line);
 	fclose(fp);
 	return (0);
 }
