@@ -42,6 +42,39 @@ char **tokenn(char *str)
 	return (tokens);
 }
 /**
+* ifs - main function
+* @fp: the command we get
+* @line: the command we get
+* Return: monty value
+*/
+
+void ifs(FILE *fp, char *line)
+{
+	char **token = NULL;
+	stack_t *head = NULL;
+	int i = 0, j;
+
+	while (fgets(line, 100, fp) != NULL)
+	{
+		i++;
+		j = _strlen(line);
+		if (j == 1)
+			continue;
+		line[j - 1] = '\0';
+		token = tokenn(line);
+
+		if (_strcmp(token[0], "push") == 0)
+			add_dnodeint(&head, atoi(token[1]));
+		else if (_strcmp(token[0], "pall") == 0)
+			print_dlistint(head);
+		else
+		{
+			printf("L %i: unknown instruction %s\n", i, token[1]);
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+/**
 * main - main function
 * @argc: the command we get
 * @argv: the command we get
@@ -51,9 +84,7 @@ char **tokenn(char *str)
 int main(int argc, char *argv[])
 {
 	FILE *fp;
-	char *line, **token = NULL;
-	stack_t *head = NULL;
-	int i = 0, j;
+	char *line;
 
 	if (argc != 2)
 	{
@@ -68,25 +99,9 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	line = malloc(sizeof(char) * 2048);
-	while (fgets(line, 100, fp) != NULL)
-	{
-		i++;
-		j = _strlen(line);
-		if (j == 1)
-			continue;
-		line[j - 1] = '\0';
-			token = tokenn(line);
-			if (_strcmp(token[0], "push") == 0)
-				add_dnodeint(&head, atoi(token[1]));
-			else if (_strcmp(token[0], "pall") == 0)
-				print_dlistint(head);
-			else
-			{
-				printf("L %i: unknown instruction %s\n", i, token[1]);
-				free(line);
-				exit(EXIT_FAILURE);
-			}
-	}
+	if (line == NULL)
+		return (1);
+	ifs(fp, line);
 	free(line);
 	fclose(fp);
 	return (0);

@@ -47,4 +47,6 @@ size_t print_dlistint(const stack_t *h);
 size_t dlistint_len(const stack_t *h);
 stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
+
+void ifs(FILE *fp, char *line);
 #endif
