@@ -64,7 +64,16 @@ void ifs(FILE *fp, char *line)
 		token = tokenn(line);
 
 		if (_strcmp(token[0], "push") == 0)
-			add_dnodeint(&head, atoi(token[1]));
+		{
+			if (token[1])
+				add_dnodeint(&head, atoi(token[1]));
+			else
+			{
+				printf("L %i: push integer\n", i);
+				exit(EXIT_FAILURE);
+			}
+
+		}
 		else if (_strcmp(token[0], "pall") == 0)
 			print_dlistint(head);
 		else
