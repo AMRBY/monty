@@ -70,6 +70,9 @@ void ifs(FILE *fp, char *line)
 			else
 			{
 				printf("L %i: push integer\n", i);
+				free_arr(token);
+				free_dlistint(head);
+				free(line);
 				exit(EXIT_FAILURE);
 			}
 
@@ -79,6 +82,9 @@ void ifs(FILE *fp, char *line)
 		else
 		{
 			printf("L %i: unknown instruction %s\n", i, token[1]);
+			free_arr(token);
+			free_dlistint(head);
+			free(line);
 			exit(EXIT_FAILURE);
 		}
 	free_arr(token);
