@@ -69,7 +69,7 @@ void ifs(FILE *fp, char *line)
 				add_dnodeint(&head, atoi(token[1]));
 			else
 			{
-				printf("L %i: push integer\n", i);
+				printf("L%i: usage: push integer\n", i);
 				free_arr(token);
 				free_dlistint(head);
 				free(line);
@@ -81,7 +81,7 @@ void ifs(FILE *fp, char *line)
 			print_dlistint(head);
 		else
 		{
-			printf("L %i: unknown instruction %s\n", i, token[1]);
+			printf("L%i: unknown instruction %s\n", i, token[1]);
 			free_arr(token);
 			free_dlistint(head);
 			free(line);
