@@ -51,7 +51,7 @@ char **tokenn(char *str)
 void ifs(FILE *fp, char *line)
 {
 	char **token = NULL;
-	stack_t *head = NULL, *h;
+	stack_t *head = NULL;
 	int i = 0, j;
 
 	while (fgets(line, 100, fp) != NULL)
@@ -75,7 +75,7 @@ void ifs(FILE *fp, char *line)
 				free(line);
 				exit(EXIT_FAILURE);
 			}
-			//push(token, head, line, i);
+			/*push(token, head, line, i);*/
 
 		}
 		else if (_strcmp(token[0], "pall") == 0)
