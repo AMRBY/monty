@@ -34,6 +34,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern stack_t *head;
 /*String functions*/
 int _strlen(const char *str);
 int _strcmp(char *s1, char *s2);
@@ -49,5 +50,9 @@ stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
 void free_dlistint(stack_t *head);
 
+/**monty functions**/
+void free_arr(char **str);
 void ifs(FILE *fp, char *line);
+void free_all(char **token, stack_t *head, char *line);
+void push(char **token, stack_t *head, char *line, int i);
 #endif
